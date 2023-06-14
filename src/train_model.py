@@ -50,7 +50,7 @@ def train(content, style, generated, device, train_config, output_dir, output_im
     alpha = train_config.get('alpha') if train_config.get('alpha') is not None else 1
     beta = train_config.get('beta') if train_config.get('beta') is not None else 0.002
     capture_content_features_from = train_config.get('capture_content_features_from') \
-        if train_config.get('capture_content_features_from') is not None else {'conv51'}
+        if train_config.get('capture_content_features_from') is not None else {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
     capture_style_features_from = train_config.get('capture_style_features_from') \
         if train_config.get('capture_style_features_from') is not None else {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
     
@@ -144,33 +144,6 @@ def train_frame(content, style, generated, device, output_img_fmt):
     beta = 0.001
     capture_content_features_from = {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
     capture_style_features_from = {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
-
-    # check if values passed to capture_content_features_from and capture_style_features_from are valid
-    if not isinstance(capture_content_features_from, set):
-        if isinstance(capture_content_features_from, dict):
-            capture_content_features_from = set(capture_content_features_from.keys())
-        elif isinstance(capture_content_features_from, str):
-            capture_content_features_from = set([item.strip() for item in capture_content_features_from.split(',')])
-        else:
-            print(f"ERROR: invalid value for 'capture_content_features_from' in training configuration file: {capture_content_features_from}.")
-            return 0
-
-    if not capture_content_features_from.issubset({'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}):
-        print(f"ERROR: invalid value for 'capture_content_features_from' in training configuration file: {capture_content_features_from}.")
-        return 0
-
-    if not isinstance(capture_style_features_from, set):
-        if isinstance(capture_style_features_from, dict):
-            capture_style_features_from = set(capture_style_features_from.keys())
-        elif isinstance(capture_style_features_from, str):
-            capture_style_features_from = set([item.strip() for item in capture_style_features_from.split(',')])
-        else:
-            print(f"ERROR: invalid value for 'capture_style_features_from' in training configuration file: {capture_style_features_from}.")
-            return 0
-
-    if not capture_style_features_from.issubset({'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}):
-        print(f"ERROR: invalid value for 'capture_style_features_from' in training configuration file: {capture_style_features_from}.")
-        return 0
 
     optimizer = torch.optim.Adam([generated], lr=lr)
 
