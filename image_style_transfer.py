@@ -9,7 +9,7 @@ from torchvision.utils import save_image
 from PIL import Image
 
 from src.process_image import load_image, get_image_name_ext
-from src.train_model import train
+from src.train_model import train_image
 
 
 def image_style_transfer(config):
@@ -109,7 +109,7 @@ def image_style_transfer(config):
         output_img_fmt = content_img_fmt
 
     # train model
-    success = train(content_tensor, style_tensor, generated_tensor, device, train_config, output_dir, output_img_fmt, content_img_name, style_img_name, verbose=verbose)
+    success = train_image(content_tensor, style_tensor, generated_tensor, device, train_config, output_dir, output_img_fmt, content_img_name, style_img_name, verbose=verbose)
 
     # save output image to specified directory
     if success:

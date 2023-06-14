@@ -40,7 +40,7 @@ def _get_style_loss(style_feature, generated_feature):
     return torch.mean((generated_gram - style_gram) ** 2)
 
 
-def train(content, style, generated, device, train_config, output_dir, output_img_fmt, content_img_name, style_img_name, verbose=False):
+def train_image(content, style, generated, device, train_config, output_dir, output_img_fmt, content_img_name, style_img_name, verbose=False):
     """Update the output image using pre-trained VGG19 model."""
     model = ImageStyleTransfer_VGG19().to(device).eval()    # freeze parameters in the model
 
