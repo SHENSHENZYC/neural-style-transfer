@@ -10,7 +10,7 @@ from torchvision.utils import save_image
 from PIL import Image
 
 from src.process_image import load_image, get_image_name_ext
-from src.train_model import train
+from src.train_model import train_frame
 
 
 def _image_style_transfer(content_frame_path, style_path, output_frame_path, output_size, init_method):
@@ -46,7 +46,7 @@ def _image_style_transfer(content_frame_path, style_path, output_frame_path, out
     output_img_fmt = 'jpg'
 
     # train model
-    success = train(content_tensor, style_tensor, generated_tensor, device, output_img_fmt)
+    success = train_frame(content_tensor, style_tensor, generated_tensor, device, output_img_fmt)
 
     # save output image to specified directory
     if success:

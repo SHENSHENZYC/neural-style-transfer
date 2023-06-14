@@ -133,5 +133,74 @@ def train(content, style, generated, device, train_config, output_dir, output_im
     return 1
 
 
+def train_frame(content, style, generated, device, output_img_fmt):
+    """Update the output image using pre-trained VGG19 model for video transfer."""
+    model = ImageStyleTransfer_VGG19().to(device).eval()    # freeze parameters in the model
 
+    # set default value for each configuration
+    num_epochs = 2000
+    lr = 0.01
+    alpha = 50
+    beta = 0.001
+    capture_content_features_from = {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
+    capture_style_features_from = {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
 
+    # check if values passed to capture_content_features_from and capture_style_features_from are valid
+    if not isinstance(capture_content_features_from, set):
+        if isinstance(capture_content_features_from, dict):
+            capture_content_features_from = set(capture_content_features_from.keys())
+        elif isinstance(capture_content_features_from, str):
+            capture_content_features_from = set([item.strip() for item in capture_content_features_from.split(',')])
+        else:
+            print(f"ERROR: invalid value for 'capture_content_features_from' in training configuration file: {capture_content_features_from}.")
+            return 0
+
+    if not capture_content_features_from.issubset({'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}):
+        print(f"ERROR: invalid value for 'capture_content_features_from' in training configuration file: {capture_content_features_from}.")
+        return 0
+
+    if not isinstance(capture_style_features_from, set):
+        if isinstance(capture_style_features_from, dict):
+            capture_style_features_from = set(capture_style_features_from.keys())
+        elif isinstance(capture_style_features_from, str):
+            capture_style_features_from = set([item.strip() for item in capture_style_features_from.split(',')])
+        else:
+            print(f"ERROR: invalid value for 'capture_style_features_from' in training configuration file: {capture_style_features_from}.")
+            return 0
+
+    if not capture_style_features_from.issubset({'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}):
+        print(f"ERROR: invalid value for 'capture_style_features_from' in training configuration file: {capture_style_features_from}.")
+        return 0
+
+    optimizer = torch.optim.Adam([generated], lr=lr)
+
+    for epoch in range(num_epochs):
+        # get features maps of content, style and generated images from chosen layers
+        content_features = model(content)
+        style_features = model(style)
+        generated_features = model(generated)
+
+        content_loss = style_loss = 0
+
+        for layer_name in generated_features.keys():
+            content_feature = content_features[layer_name]
+            style_feature = style_features[layer_name]
+            generated_feature = generated_features[layer_name]
+
+            content_loss_per_feature = _get_content_loss(content_feature, generated_feature)
+            style_loss_per_feature = _get_style_loss(style_feature, generated_feature)
+
+            if layer_name in capture_content_features_from:
+                content_loss += content_loss_per_feature
+
+            if layer_name in capture_style_features_from:
+                style_loss += style_loss_per_feature
+
+        # compute loss
+        total_loss = alpha * content_loss + beta * style_loss
+
+        optimizer.zero_grad()
+        total_loss.backward()
+        optimizer.step()
+
+    return 1
