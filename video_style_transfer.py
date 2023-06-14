@@ -87,7 +87,7 @@ def video_style_transfer(config):
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    fps = cap.get(cv2.CAP_PROP_FPS)
+    content_fps = cap.get(cv2.CAP_PROP_FPS)
 
     # extract frames from content video
     for i in range(total_frames):
@@ -131,7 +131,7 @@ def video_style_transfer(config):
     output_video_path = os.path.join(output_dir, f"nst-{content_video_name}-{style_img_name}-final.mp4")
 
     output_frame_height, output_frame_width, _ = cv2.imread(os.path.join(output_dir, "transferred_frames", "transferred_frame-00000001.jpg")).shape
-    output_fps = config.get('fps') if config.get('fps') is not None else fps
+    output_fps = config.get('fps') if config.get('fps') is not None else content_fps
     # synthesize video using transferred content frames
     cv2_fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     video_writer = cv2.VideoWriter(output_video_path, cv2_fourcc, output_fps, (output_frame_width, output_frame_height), True)
