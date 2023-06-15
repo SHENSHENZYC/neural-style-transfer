@@ -53,7 +53,7 @@ def train_image(content, style, generated, device, train_config, output_dir, out
         if train_config.get('capture_content_features_from') is not None else {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
     capture_style_features_from = train_config.get('capture_style_features_from') \
         if train_config.get('capture_style_features_from') is not None else {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
-    
+            
     # check if values passed to capture_content_features_from and capture_style_features_from are valid
     if not isinstance(capture_content_features_from, set):
         if isinstance(capture_content_features_from, dict):

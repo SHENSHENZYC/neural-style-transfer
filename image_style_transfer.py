@@ -80,7 +80,7 @@ def image_style_transfer(config):
 
     # load training configuration if provided
     train_config = dict()
-    if (train_config_path := config.get('training_config')) is not None:
+    if (train_config_path := config.get('train_config_path')) is not None:
         if verbose:
             print("Loading training configuration file...")
 
@@ -97,7 +97,7 @@ def image_style_transfer(config):
         if verbose:
             print("Training configuration file successfully loaded.")
             print()
-    
+        
     if verbose:
         print("Training...")
     
