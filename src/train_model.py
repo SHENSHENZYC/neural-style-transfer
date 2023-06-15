@@ -102,13 +102,12 @@ def train_image(content, style, generated, device, train_config, output_dir, out
             style_feature = style_features[layer_name]
             generated_feature = generated_features[layer_name]
 
-            content_loss_per_feature = _get_content_loss(content_feature, generated_feature)
-            style_loss_per_feature = _get_style_loss(style_feature, generated_feature)
-
             if layer_name in capture_content_features_from:
+                content_loss_per_feature = _get_content_loss(content_feature, generated_feature)
                 content_loss += content_loss_per_feature
             
             if layer_name in capture_style_features_from:
+                style_loss_per_feature = _get_style_loss(style_feature, generated_feature)
                 style_loss += style_loss_per_feature
 
         # compute loss 
@@ -138,7 +137,7 @@ def train_frame(content, style, generated, device, output_img_fmt):
     model = ImageStyleTransfer_VGG19().to(device).eval()    # freeze parameters in the model
 
     # set default value for each configuration
-    num_epochs = 2000
+    num_epochs = 3000
     lr = 0.01
     alpha = 50
     beta = 0.001
@@ -159,14 +158,13 @@ def train_frame(content, style, generated, device, output_img_fmt):
             content_feature = content_features[layer_name]
             style_feature = style_features[layer_name]
             generated_feature = generated_features[layer_name]
-
-            content_loss_per_feature = _get_content_loss(content_feature, generated_feature)
-            style_loss_per_feature = _get_style_loss(style_feature, generated_feature)
-
+            
             if layer_name in capture_content_features_from:
+                content_loss_per_feature = _get_content_loss(content_feature, generated_feature)
                 content_loss += content_loss_per_feature
 
             if layer_name in capture_style_features_from:
+                style_loss_per_feature = _get_style_loss(style_feature, generated_feature)
                 style_loss += style_loss_per_feature
 
         # compute loss

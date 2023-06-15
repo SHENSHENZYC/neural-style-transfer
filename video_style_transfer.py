@@ -35,6 +35,7 @@ def _image_style_transfer(content_frame_path, style_path, output_frame_path, out
     # load content and style images
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     content_tensor = load_image(content_frame_path, device, output_size=output_size)
+    output_size = (content_tensor.shape[2], content_tensor.shape[3])
     style_tensor = load_image(style_path, device, output_size=output_size)
 
     # initialize output image
@@ -44,7 +45,7 @@ def _image_style_transfer(content_frame_path, style_path, output_frame_path, out
         generated_tensor = content_tensor.clone().requires_grad_(True)
 
     output_img_fmt = 'jpg'
-
+    
     # train model
     success = train_frame(content_tensor, style_tensor, generated_tensor, device, output_img_fmt)
 
@@ -66,7 +67,7 @@ def video_style_transfer(config):
         content_video_path = config.get('content_filepath')
         style_path = config.get('style_path')
     
-    output_size = config.get('output_image_size')
+    output_size = config.get('output_frame_size')
     if output_size is not None:
         if len(output_size) > 1: 
             output_size = tuple(output_size)
