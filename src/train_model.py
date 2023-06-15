@@ -48,7 +48,7 @@ def train_image(content, style, generated, device, train_config, output_dir, out
     num_epochs = train_config.get('num_epochs') if train_config.get('num_epochs') is not None else 6000
     lr = train_config.get('learning_rate') if train_config.get('learning_rate') is not None else 0.001
     alpha = train_config.get('alpha') if train_config.get('alpha') is not None else 1
-    beta = train_config.get('beta') if train_config.get('beta') is not None else 0.002
+    beta = train_config.get('beta') if train_config.get('beta') is not None else 0.01
     capture_content_features_from = train_config.get('capture_content_features_from') \
         if train_config.get('capture_content_features_from') is not None else {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
     capture_style_features_from = train_config.get('capture_style_features_from') \
