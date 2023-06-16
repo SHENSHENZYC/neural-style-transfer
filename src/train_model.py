@@ -137,7 +137,7 @@ def train_frame(content, style, generated, device, output_img_fmt):
     model = ImageStyleTransfer_VGG19().to(device).eval()    # freeze parameters in the model
 
     # set default value for each configuration
-    num_epochs = 3000
+    num_epochs = 2000
     lr = 0.01
     alpha = 50
     beta = 0.001
