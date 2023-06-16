@@ -85,6 +85,10 @@ def video_style_transfer(config):
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     content_fps = cap.get(cv2.CAP_PROP_FPS)
+    
+    if total_frames == 0:
+        print(f"ERROR: could not retrieve frames from content video at path: '{content_video_path}'.")
+        return
 
     # extract frames from content video
     for i in range(total_frames):
