@@ -13,7 +13,7 @@ from src.process_image import load_image, get_image_name_ext
 from src.train_model import train_frame
 
 
-def _image_style_transfer(content_frame_path, style_path, output_frame_path, output_size, init_method):
+def _image_style_transfer(content_frame_path, style_path, output_frame_path, output_size):
     try:
         content_img = Image.open(content_frame_path)
     except FileNotFoundError:
@@ -39,10 +39,7 @@ def _image_style_transfer(content_frame_path, style_path, output_frame_path, out
     style_tensor = load_image(style_path, device, output_size=output_size)
 
     # initialize output image
-    if init_method == 'random':
-        generated_tensor = torch.randn(content_tensor.shape, device=device, requires_grad=True)
-    else:
-        generated_tensor = content_tensor.clone().requires_grad_(True)
+    generated_tensor = content_tensor.clone().requires_grad_(True)
 
     output_img_fmt = 'jpg'
     
@@ -74,7 +71,6 @@ def video_style_transfer(config):
         else:
             output_size = output_size[0]
     
-    init_method = config.get('init_method')
     verbose = not config.get('quiet')
 
     if not os.path.exists(os.path.join(output_dir, "content_frames")):
@@ -113,7 +109,7 @@ def video_style_transfer(config):
     for i in range(total_frames):
         content_frame_path = os.path.join(output_dir, "content_frames", f"frame-{i+1:08d}.jpg")
         output_frame_path = os.path.join(output_dir, "transferred_frames", f"transferred_frame-{i+1:08d}.jpg")
-        success = _image_style_transfer(content_frame_path, style_path, output_frame_path, output_size, init_method)
+        success = _image_style_transfer(content_frame_path, style_path, output_frame_path, output_size)
 
         if verbose:
             if success:
@@ -159,7 +155,6 @@ def main():
     parser.add_argument("--output_dir", required="--file_dir" not in sys.argv, type=str, help="Directory that stores the output video. Will be the same as file_dir if not provided while image_dir provided.")
     parser.add_argument("--output_frame_size", nargs="+", type=int, help="Size of frames of output video. Either one integer or two integers (height, weight) separated by space is accepted. Will use the dimensions of frames of content video if not provided.")
     parser.add_argument("--fps", type=int, help="FPS of output video. Will use the FPS of content video if not provided.")
-    parser.add_argument("--init_method", choices=["content", "random"], default="content", help="Initialization method of generated image. Either \"random\" by randomization or \"content\" based on content image (recommended). Default is \"content\".")
     parser.add_argument("--quiet", type=bool, default=False, help="True stops showing debugging messages, loss function values during training process, and stops generating intermediate images.")
 
     args = parser.parse_args()

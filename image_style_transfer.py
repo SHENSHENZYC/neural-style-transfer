@@ -60,6 +60,7 @@ def image_style_transfer(config):
             output_size = output_size[0]
 
     content_tensor = load_image(content_path, device, output_size=output_size)
+    output_size = (content_tensor.shape[2], content_tensor.shape[3])
     style_tensor = load_image(style_path, device, output_size=output_size)
 
     if verbose:
@@ -68,11 +69,7 @@ def image_style_transfer(config):
         print("Initializing output image...")
 
     # initialize output image
-    init_method = config.get('init_method')
-    if init_method == 'random':
-        generated_tensor = torch.randn(content_tensor.shape, device=device, requires_grad=True)
-    else:
-        generated_tensor = content_tensor.clone().requires_grad_(True)
+    generated_tensor = content_tensor.clone().requires_grad_(True)
 
     if verbose:
         print("Output image successfully initialized.")
@@ -130,7 +127,6 @@ def main():
     parser.add_argument("--output_dir", required="--image_dir" not in sys.argv, type=str, help="Directory that stores the output image. Will be the same as image_dir if not provided while image_dir provided.")
     parser.add_argument("--output_image_size", nargs="+", type=int, help="Size of the output image. Either one integer or two integers separated by space is accepted. Will use the dimensions of content image if not provided.")
     parser.add_argument("--output_image_format", choices=["jpg", "png", "jpeg", "same"], default="jpg", help="Format of the output image. Can be either \"jpg\", \"png\", \"jpeg\", or \"same\". If \"same\", output image will have the same format as the content image. \"jpg\" will be the default format.")
-    parser.add_argument("--init_method", choices=["content", "random"], default="content", help="Initialization method of generated image. Either \"random\" by randomization or \"content\" based on content image (recommended). Default is \"content\".")
     parser.add_argument("--train_config_path", type=str, help="Path to training configuration file in .yaml format. May include: num_epochs, learning_rate, alpha, beta, capture_content_features_from, capture_style_features_from.")
     parser.add_argument("--quiet", type=bool, default=False, help="True stops showing debugging messages, loss function values during training process, and stops generating intermediate images.")
 

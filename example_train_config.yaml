@@ -1,2 +1,3 @@
+num_epochs: 6000
 alpha: 100
-beta: 0.01
+beta: 1
