@@ -23,6 +23,16 @@ Neural style transfer on images begins with using a pre-trained deep neural netw
 Here are some examples of style-transferred images along with their original content and style images:
 
 <p align="center">
+    <img src="data/example03/nst-elk-udnie-final.jpg" width=300/>
+</p>
+<p align="center">
+    <img src="data/example03/elk.jpg" height=270 width=200/>
+    <img src="data/example03/udnie.jpg" height=270 width=200/>
+</p>
+
+----------------
+
+<p align="center">
     <img src="data/example03/nst-green_bridge-vg_la_cafe-final.jpg" width=450/>
 </p>
 <p align="center">
