@@ -20,7 +20,11 @@ This repository develops tools that perform neural style transfer on digital con
 
 Neural style transfer on images begins with using a pre-trained deep neural network, known as VGG19, to extract style and content information from the input images. By preserving the content features from the content image and the style features from the style image, a new image is generated that exhibits the content of the content image in the style of the style image in a visually appealing way. This process leverages the power of convolutional neural networks and iterative optimization algorithms to achieve impressive artistic transformations.
 
-Here are some examples of style-transferred images along with their original content and style images:
+_Note: Articulate Artistic Style_
+
+For the best performance and visually appealing results, it is recommended to choose style images that exhibit a highly articulate and distinct artistic style. The neural style transfer algorithm relies on capturing and transferring the artistic characteristics present in the style image onto the content image. Therefore, the style image should have a clear and distinct artistic style that can be easily captured by the algorithm.
+
+Here are some examples of style-transferred images along with their original content and style images where the style images all exhibit a highly articulate artistic style:
 
 <p align="center">
     <img src="data/example03/nst-elk-udnie-final.jpg" width=300/>
@@ -50,10 +54,17 @@ Here are some examples of style-transferred images along with their original con
     <img src="data/example04/woman_in_a_parasol.jpg" height=270 width=200/>
 </p>
 
-
 Furthermore, we extend the neural style transfer technique to videos.Built on top of neural style transfer for images, video style transfer involves splitting the video into frames, applying image style transfer on each frame, and subsequently synthesizing the transferred frames to reconstruct the video so that it has a visually pleasing artistic transformation.
 
-<img src="videos/example01/nst-man_at_sea_sliced-mondrian-final.gif" width=>
+The following example demonstrates the video style transfer process:
+
+<p align="center">
+    <img src="videos/example03/nst-woman_with_bus_sliced-vg_starry_night-final.gif" width=450/>
+</p>
+<p align="center">
+    <img src="videos/example03/woman_with_bus_sliced.gif" height=180 width=250/>
+    <img src="videos/example03/vg_starry_night.jpg" height=180 width=250/>
+</p>
 
 ## Installation
 To run the neural style transfer project, follow these steps:
