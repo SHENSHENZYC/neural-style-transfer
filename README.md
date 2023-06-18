@@ -27,8 +27,8 @@ Here is an example of a style-transferred image:
 which is generated from the following content and style images:
 
 <p align="center">
-    <img src="data/example03/green_bridge.jpg" height=200 width=250/>
-    <img src="data/example03/vg_la_cafe.jpg" height=200 width=250/>
+    <img src="data/example03/green_bridge.jpg" height=180 width=250/>
+    <img src="data/example03/vg_la_cafe.jpg" height=180 width=250/>
 </p>
 
 Furthermore, we extend the neural style transfer technique to videos.Built on top of neural style transfer for images, video style transfer involves splitting the video into frames, applying image style transfer on each frame, and subsequently synthesizing the transferred frames to reconstruct the video.
