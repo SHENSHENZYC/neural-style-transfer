@@ -20,7 +20,7 @@ This repository develops tools that perform neural style transfer on digital con
 
 Neural style transfer on images begins with using a pre-trained deep neural network, known as VGG19, to extract style and content information from the input images. By preserving the content features from the content image and the style features from the style image, a new image is generated that exhibits the content of the content image in the style of the style image in a visually appealing way. This process leverages the power of convolutional neural networks and iterative optimization algorithms to achieve impressive artistic transformations.
 
-_Note: Articulate Artistic Style_
+**Note: Articulate Artistic Style**
 
 For the best performance and visually appealing results, it is recommended to choose style images that exhibit a highly articulate and distinct artistic style. The neural style transfer algorithm relies on capturing and transferring the artistic characteristics present in the style image onto the content image. Therefore, the style image should have a clear and distinct artistic style that can be easily captured by the algorithm.
 
@@ -76,20 +76,25 @@ The following examples demonstrate the video style transfer process:
     <img src="videos/example02/wave_crop.jpg" height=180 width=250/>
 </p>
 
-
 ## Installation
+
 To run the neural style transfer project, follow these steps:
 
 1. Clone the repository:
-   ```
+
+   ```bash
    git clone https://github.com/your-username/neural-style-transfer.git
    ```
+
 2. Navigate to the project directory:
-   ```
+
+   ```bash
    cd neural-style-transfer
    ```
+
 3. Install the required dependencies:
-   ```
+
+   ```bash
    pip install -r requirements.txt
    ```
 
@@ -98,12 +103,30 @@ To run the neural style transfer project, follow these steps:
 For optimal performance, it is recommended to run the program on a system with GPU acceleration. Make sure to have the necessary GPU drivers and libraries installed. This will significantly speed up the style transfer process.
 
 ## Usage
+
 ### Image Style Transfer
-To perform style transfer on an image, use the `image_style_transfer.py` program. Run the following command:
+
+To perform style transfer on an image, use the `image_style_transfer.py` program by running the following command:
+
+```bash
+python image_style_transfer.py
+    --image_dir <path_to_directory_that_contains_content_and_style_image>
+    --content_filename <content_image_name>
+    --style_filename <style_image_name>
+    --output_image_size <height> <width>
 ```
-python image_style_transfer.py --content <path_to_content_image> --style <path_to_style_image> --output <output_path>
+
+The synthesized image will be saved by default in the same directory as `image_dir` refers to, if no `output_dir` is specified. The `--output_image_size` argument is optional and is used to specify the desired height and width of the output image. If not specified, the output image will have the same size as the content image. Another optional argument `--quiet`, by default is "False", can be set to "True" to suppress the debugging messages and intermediate images that are generated during the style transfer process.
+
+In the case that your content image and style image do not belong to the same directory, you can specify the paths to the content and style images using the `--content_path` and `--style_path` arguments respectively. However, now `--output_dir` becomes a required argument to specify where to save the synthesized image. For example:
+
+```bash
+python image_style_transfer.py
+    --content_path <path_to_content_image>
+    --style_path <path_to_style_image>
+    --output_dir <path_to_output_directory>
+    --output_image_size <height> <width>
 ```
-Replace `<path_to_content_image>` with the path to the input content image, `<path_to_style_image>` with the path to the input style image, and `<output_path>` with the desired output path for the transferred image.
 
 ### Video Style Transfer
 To apply style transfer on a video, utilize the `video_style_transfer.py` program. Execute the following command:
