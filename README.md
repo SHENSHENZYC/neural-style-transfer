@@ -16,6 +16,7 @@ This repository develops tools that perform neural style transfer on digital con
     - [Group 1: Style Variation with the Same Content Image](#group-1-style-variation-with-the-same-content-image)
     - [Group 2: Content Variation with the Same Style Image](#group-2-content-variation-with-the-same-style-image)
   - [Contributing](#contributing)
+  - [Acknowledgements](#acknowledgements)
   - [License](#license)
 
 ## Introduction
@@ -226,12 +227,13 @@ def train_frame(content, style, generated, device, output_img_fmt):
 
 The repository is organized as follows:
 
-- `src/process_image.py`: This module contains functions to load an image with a desired size.
-- `src/train_model.py`: This module defines the neural network architecture and the training process.
-- `image_style_transfer.py`: This program allows the user to transfer the style of an image onto another image.
-- `video_style_transfer.py`: This program enables the user to transfer the style of an image onto a video.
+- [src/process_image.py](src/process_image.py): This module contains functions to load an image with a desired size.
+- [src/train_model.py](src/train_model.py): This module defines the neural network architecture and the training process.
+- [image_style_transfer.py](image_style_transfer.py): This program allows the user to transfer the style of an image onto another image.
+- [video_style_transfer.py](video_style_transfer.py): This program enables the user to transfer the style of an image onto a video.
 - `data/`: This directory contains example input images and stnthesized images for style transfer.
 - `videos/`: This directory contains example input videos and synthesized videos for style transfer.
+- [report.ipynb](report.ipynb): This comprehensive Jupyter notebook provides a detailed explanation of the implementation of neural style transfer. The notebook serves as a comprehensive guide, allowing readers to understand the inner workings of the implementation and gain insights into the underlying concepts and techniques employed.
 
 ## Examples
 
@@ -279,11 +281,22 @@ In this group, we observe the impact of using different content images while mai
 
 The style image remains constant, while the content image is varied, resulting in a collection of style-transferred images with diverse content and visual styles.
 
-You can find more example images in the `examples/` directory of this repository.
-
+You can find more example images in the `data/` directory or more example videos in the `videos/` directory of this repository, or you could try out the style transfer tools yourself with the images of your choice!
 
 ## Contributing
+
 Contributions to this project are welcome. Feel free to submit issues and pull requests.
 
+## Acknowledgements
+
+We would like to express our gratitude to the following open-source libraries and frameworks for their valuable contributions to this project:
+
+- [PyTorch](https://pytorch.org/) - A deep learning framework used for implementing the neural style transfer models.
+- [OpenCV](https://opencv.org/) - A computer vision library used for video processing and manipulation.
+- [Pillow](https://python-pillow.org/) - A Python imaging library used for image processing and manipulation.
+
+We would also like to thank the authors and contributors of the above libraries for their efforts in developing and maintaining high-quality open-source software.
+
 ## License
+
 This project is licensed under the [MIT License](LICENSE).
