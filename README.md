@@ -158,7 +158,7 @@ capture_content_features_from: <layer_name_in_vgg19_as_set>
 capture_style_features_from: <layer_name_in_vgg19_as_set>
 ```
 
-`example_train_config.yaml` serves as an example of a valid configuration file. If not specified, the following default values will be used:
+[example_train_config.yaml](example_train_config.yaml) serves as an example of a valid configuration file. If not specified, the following default values will be used:
 
 ```yaml
 num_epochs: 6000
