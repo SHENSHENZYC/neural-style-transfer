@@ -262,8 +262,20 @@ In the above examples, the same content image is stylized with different style i
 
 In this group, we observe the impact of using different content images while maintaining a consistent style image. It highlights how the style is transferred onto various content images, leading to unique visual interpretations:
 
-![Group 2](examples/group2.jpg)
-*Style Image: example_images/style.jpg*
+<p align="center">
+    <img src="data/example02/nst-golden_gate-pawel-final.jpg" height=267 width=400/>
+    <img src="data/example02/golden_gate.jpg" height=267 width=400/>
+</p>
+
+<p align="center">
+    <img src="data/example01/nst-figures-mosaic-final.jpg" height=267 width=400/>
+    <img src="data/example01/mosaic.jpg" height=267 width=280/>
+</p>
+
+<p align="center">
+    <img src="data/example01/nst-figures-vg_wheat_field_cropped-final.jpg" height=267 width=400/>
+    <img src="data/example01/vg_wheat_field_cropped.jpg" height=267 width=280/>
+</p>
 
 The style image remains constant, while the content image is varied, resulting in a collection of style-transferred images with diverse content and visual styles.
 
