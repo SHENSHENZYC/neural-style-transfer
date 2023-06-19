@@ -105,6 +105,14 @@ To run the neural style transfer project, follow these steps:
 
 For optimal performance, it is recommended to run the program on a system with GPU acceleration. Make sure to have the necessary GPU drivers and libraries installed. This will significantly speed up the style transfer process.
 
+If you do not have GPU access on your local machine, you may use Google Colab to run the two following Colab notebooks on a GPU-accelerated virtual machine:
+
+- Image style transfer notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1RuSZRVTXxMSzpKg0vGVktIPxjIs_Ggfq?usp=sharing)
+
+- Video style transfer notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1r3IvxW-gWnPGUGE4vMvSeoarCGaze1QK?usp=sharing)
+
+But please note that free access to GPU on Google Colab is limited and thus, it is recommended to use it only for testing purposes.
+
 ## Usage
 
 ### Image Style Transfer
