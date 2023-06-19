@@ -56,7 +56,7 @@ Here are some examples of style-transferred images along with their original con
 
 Furthermore, we extend the neural style transfer technique to videos.Built on top of neural style transfer for images, video style transfer involves splitting the video into frames, applying image style transfer on each frame, and subsequently synthesizing the transferred frames to reconstruct the video so that it has a visually pleasing artistic transformation.
 
-The following example demonstrates the video style transfer process:
+The following examples demonstrate the video style transfer process:
 
 <p align="center">
     <img src="videos/example03/nst-woman_with_bus_sliced-vg_starry_night-final.gif" width=450/>
@@ -65,6 +65,17 @@ The following example demonstrates the video style transfer process:
     <img src="videos/example03/woman_with_bus_sliced.gif" height=180 width=250/>
     <img src="videos/example03/vg_starry_night.jpg" height=180 width=250/>
 </p>
+
+----------------
+
+<p align="center">
+    <img src="videos/example02/nst-hug_in_sunset_sliced-wave_crop-final.gif" width=450/>
+</p>
+<p align="center">
+    <img src="videos/example02/hug_in_sunset_sliced.gif" height=180 width=250/>
+    <img src="videos/example02/wave_crop.jpg" height=180 width=250/>
+</p>
+
 
 ## Installation
 To run the neural style transfer project, follow these steps:
