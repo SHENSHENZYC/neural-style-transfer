@@ -289,7 +289,7 @@ In this group, we observe the impact of using different content images while mai
 
 The style image remains constant, while the content image is varied, resulting in a collection of style-transferred images with diverse content and visual styles.
 
-You can find more example images in the `data/` directory or more example videos in the `videos/` directory of this repository, or you could try out the style transfer tools yourself with the images of your choice!
+You can find more example images in the `data/` directory or more example videos in the `videos/` directory of this repository, or you could try out the style transfer tools yourself with the images and videos of your choice!
 
 ## Contributing
 
