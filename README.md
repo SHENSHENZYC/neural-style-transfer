@@ -130,6 +130,8 @@ python image_style_transfer.py
 
 The synthesized image will be saved by default in the same directory as `image_dir` refers to, if no `output_dir` is specified.
 
+The `--image_dir` argument is used to specify the path to the directory that contains the content and style images. The content and style images must be named as `content_filename` and `style_filename` respectively. If not specified, the content and style images must be named as `content.jpg` and `style.jpg` respectively.
+
 The `--output_image_size` argument is optional and is used to specify the desired height and width of the output image. If not specified, the output image will have the same size as the content image.
 
 The `--output_image_format` argument is also optional and is used to specify the desired output image format. Acceptable options are: "jpg", "png", "jpeg", and "same". If set to "same", the output image will be saved in the same format as the content image. If not specified, the output image will, by default, be saved as "jpg".
@@ -183,6 +185,8 @@ python video_style_transfer.py
 ```
 
 The synthesized video will be saved by default in the same directory as `file_dir` refers to, if no `output_dir` is specified.
+
+The `--file_dir` argument is used to specify the path to the directory that contains the content video and style image. The content video and style image must be named as `content_filename` and `style_filename` respectively. If not specified, the content video and style image must be named as `content.mp4` and `style.jpg` respectively.
 
 The `--output_frame_size` argument is optional and is used to specify the desired height and width of the output video frames. If not specified, the output video frames will have the same size as the content video frames.
 
