@@ -12,7 +12,9 @@ This repository develops tools that perform neural style transfer on digital con
     - [Image Style Transfer](#image-style-transfer)
     - [Video Style Transfer](#video-style-transfer)
   - [Project Structure](#project-structure)
-  - [Example](#example)
+  - [Examples](#examples)
+    - [Group 1: Style Variation with the Same Content Image](#group-1-style-variation-with-the-same-content-image)
+    - [Group 2: Content Variation with the Same Style Image](#group-2-content-variation-with-the-same-style-image)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -114,11 +116,18 @@ python image_style_transfer.py
     --content_filename <content_image_name>
     --style_filename <style_image_name>
     --output_image_size <height> <width>
+    --output_image_format <desired_output_image_format>
 ```
 
-The synthesized image will be saved by default in the same directory as `image_dir` refers to, if no `output_dir` is specified. The `--output_image_size` argument is optional and is used to specify the desired height and width of the output image. If not specified, the output image will have the same size as the content image. Another optional argument `--quiet`, by default is "False", can be set to "True" to suppress the debugging messages and intermediate images that are generated during the style transfer process.
+The synthesized image will be saved by default in the same directory as `image_dir` refers to, if no `output_dir` is specified.
 
-In the case that your content image and style image do not belong to the same directory, you can specify the paths to the content and style images using the `--content_path` and `--style_path` arguments respectively. However, now `--output_dir` becomes a required argument to specify where to save the synthesized image. For example:
+The `--output_image_size` argument is optional and is used to specify the desired height and width of the output image. If not specified, the output image will have the same size as the content image.
+
+The `--output_image_format` argument is also optional and is used to specify the desired output image format. Acceptable options are: "jpg", "png", "jpeg", and "same". If set to "same", the output image will be saved in the same format as the content image. If not specified, the output image will, by default, be saved as "jpg".
+
+Another optional argument `--quiet`, by default is "False", can be set to "True" to suppress the debugging messages and intermediate images that are generated during the style transfer process.
+
+In the case that your content image and style image do not belong to the same directory, you can specify the paths to the content and style images using the `--content_path` and `--style_path` arguments respectively. However, now `--output_dir` becomes a required argument to specify where to save the synthesized image. For instance:
 
 ```bash
 python image_style_transfer.py
@@ -126,33 +135,130 @@ python image_style_transfer.py
     --style_path <path_to_style_image>
     --output_dir <path_to_output_directory>
     --output_image_size <height> <width>
+    --output_image_format <desired_output_image_format>
+```
+
+Additionally, if you would like to manipulate some of the hyperparameters of the style transfer process, you may do so by specifying the path to a configuration file using the optional argument `--train_config_path`. The configuration file must be a yaml file and contains some of the following parameters:
+
+```yaml
+num_epochs: <number_of_epochs>
+learning_rate: <learning_rate>
+alpha: <content_weight_in_loss>
+beta: <style_weight_in_loss>
+capture_content_features_from: <layer_name_in_vgg19_as_set>
+capture_style_features_from: <layer_name_in_vgg19_as_set>
+```
+
+`example_train_config.yaml` serves as an example of a valid configuration file. If not specified, the following default values will be used:
+
+```yaml
+num_epochs: 6000
+learning_rate: 0.001
+alpha: 1
+beta: 0.01
+capture_content_features_from: {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
+capture_style_features_from: {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
 ```
 
 ### Video Style Transfer
-To apply style transfer on a video, utilize the `video_style_transfer.py` program. Execute the following command:
+
+To apply style transfer on a video, use the `video_style_transfer.py` program by running the following command:
+
+```bash
+python video_style_transfer.py
+    --file_dir <path_to_directory_that_contains_content_video_and_style_image>
+    --content_filename <content_video_name>
+    --style_filename <style_image_name>
+    --output_frame_size <height> <width>
+    --fps <desired_output_video_fps>
 ```
-python video_style_transfer.py --video <path_to_video> --style <path_to_style_image> --output <output_path>
+
+The synthesized video will be saved by default in the same directory as `file_dir` refers to, if no `output_dir` is specified.
+
+The `--output_frame_size` argument is optional and is used to specify the desired height and width of the output video frames. If not specified, the output video frames will have the same size as the content video frames.
+
+The `--fps` argument is also optional and is used to specify the desired output video frames per second. If not specified, the output video will, by default, have the same fps as the content video.
+
+Another optional argument `--quiet`, by default is "False", can be set to "True" to suppress the debugging messages during the video style transfer process.
+
+In the case that your content video and style image do not belong to the same directory, you can specify the paths to the content video and style image using the `--content_path` and `--style_path` arguments respectively. However, now `--output_dir` becomes a required argument to specify where to save the synthesized video. For instance:
+
+```bash
+python video_style_transfer.py
+    --content_path <path_to_content_video>
+    --style_path <path_to_style_image>
+    --output_dir <path_to_output_directory>
+    --output_frame_size <height> <width>
+    --fps <desired_output_video_fps>
 ```
-Replace `<path_to_video>` with the path to the input video, `<path_to_style_image>` with the path to the style image, and `<output_path>` with the desired output path for the transferred video.
+
+Please note that content video must be in the mp4 format for the program to properly load the video and operate the subsequent style transfer process. If your content video is not in the mp4 format, it is recommended that you follow the instructions in the [FFmpeg documentation](https://ffmpeg.org/ffmpeg.html) to convert your video to the mp4 format.
+
+Additionally, for the sake of simplicity, `video_style_transfer.py` does not support the use of a configuration file to manipulate the hyperparameters of the style transfer process. The default values of the hyperparameters used in video style transfer is listed as follows:
+
+```yaml
+num_epochs: 2000
+learning_rate: 0.01
+alpha: 50
+beta: 0.001
+capture_content_features_from: {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
+capture_style_features_from: {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
+```
+
+ However, you can still modify the hyperparameters by changing the values of the following variables in the `src/train_model.py` script:
+
+```python
+def train_frame(content, style, generated, device, output_img_fmt):
+    ...
+
+    # set default value for each configuration
+    num_epochs = 2000
+    lr = 0.01
+    alpha = 50
+    beta = 0.001
+    capture_content_features_from = {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
+    capture_style_features_from = {'conv11', 'conv21', 'conv31', 'conv41', 'conv51'}
+
+    ...
+```
 
 ## Project Structure
+
 The repository is organized as follows:
 
-- `process_image.py`: This module contains functions to load an image with a desired size.
-- `train_model.py`: This module defines the neural network architecture and the training process.
+- `src/process_image.py`: This module contains functions to load an image with a desired size.
+- `src/train_model.py`: This module defines the neural network architecture and the training process.
 - `image_style_transfer.py`: This program allows the user to transfer the style of an image onto another image.
 - `video_style_transfer.py`: This program enables the user to transfer the style of an image onto a video.
-- `example_images/`: This directory contains example input images for style transfer.
-- `example_videos/`: This directory contains example input videos for style transfer.
+- `data/`: This directory contains example input images and stnthesized images for style transfer.
+- `videos/`: This directory contains example input videos and synthesized videos for style transfer.
 
-## Example
-Here is an example of performing style transfer on an image using the provided scripts:
+## Examples
 
-```
-python image_style_transfer.py --content example_images/content.jpg --style example_images/style.jpg --output output.jpg
-```
+Here are some examples of style-transferred images generated using the neural style transfer tools:
 
-This command transfers the style of `style.jpg` onto `content.jpg` and saves the result as `output.jpg`.
+### Group 1: Style Variation with the Same Content Image
+
+In this group, we explore different style images applied to the same content image. It showcases the diverse artistic effects achieved by combining a fixed content image with various style images:
+
+<p align="center">
+    <img src="data/example01/nst-figures-ben_giles-final.jpg" height=267 width=400/>
+    <img src="data/example01/ben_giles.jpg" height=267 width=250/>
+</p>
+
+In the above examples, the same content image is stylized with different style images, resulting in a range of visually distinct outcomes.
+
+### Group 2: Content Variation with the Same Style Image
+
+In this group, we observe the impact of using different content images while maintaining a consistent style image. It highlights how the style is transferred onto various content images, leading to unique visual interpretations:
+
+![Group 2](examples/group2.jpg)
+*Style Image: example_images/style.jpg*
+
+The style image remains constant, while the content image is varied, resulting in a collection of style-transferred images with diverse content and visual styles.
+
+You can find more example images in the `examples/` directory of this repository.
+
 
 ## Contributing
 Contributions to this project are welcome. Feel free to submit issues and pull requests.
