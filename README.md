@@ -243,17 +243,17 @@ In this group, we explore different style images applied to the same content ima
 
 <p align="center">
     <img src="data/example01/nst-figures-ben_giles-final.jpg" height=267 width=400/>
-    <img src="data/example01/ben_giles.jpg" height=267 width=250/>
+    <img src="data/example01/ben_giles.jpg" height=267 width=280/>
 </p>
 
 <p align="center">
     <img src="data/example01/nst-figures-mosaic-final.jpg" height=267 width=400/>
-    <img src="data/example01/mosaic.jpg" height=267 width=250/>
+    <img src="data/example01/mosaic.jpg" height=267 width=280/>
 </p>
 
 <p align="center">
     <img src="data/example01/nst-figures-vg_wheat_field_cropped-final.jpg" height=267 width=400/>
-    <img src="data/example01/vg_wheat_field_cropped.jpg" height=267 width=250/>
+    <img src="data/example01/vg_wheat_field_cropped.jpg" height=267 width=280/>
 </p>
 
 In the above examples, the same content image is stylized with different style images, resulting in a range of visually distinct outcomes.
