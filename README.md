@@ -268,13 +268,13 @@ In this group, we observe the impact of using different content images while mai
 </p>
 
 <p align="center">
-    <img src="data/example01/nst-figures-mosaic-final.jpg" height=267 width=400/>
-    <img src="data/example01/mosaic.jpg" height=267 width=280/>
+    <img src="data/example02/nst-sea_shore-pawel-final.jpg" height=400 width=240/>
+    <img src="data/example02/sea_shore.jpg" height=400 width=240/>
 </p>
 
 <p align="center">
-    <img src="data/example01/nst-figures-vg_wheat_field_cropped-final.jpg" height=267 width=400/>
-    <img src="data/example01/vg_wheat_field_cropped.jpg" height=267 width=280/>
+    <img src="data/example02/nst-stone_pile-pawel-final.jpg" height=300 width=300/>
+    <img src="data/example02/stone_pile.jpg" height=300 width=300/>
 </p>
 
 The style image remains constant, while the content image is varied, resulting in a collection of style-transferred images with diverse content and visual styles.
