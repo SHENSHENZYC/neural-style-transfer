@@ -297,7 +297,9 @@ Contributions to this project are welcome. Feel free to submit issues and pull r
 
 ## Acknowledgements
 
-We would like to express our gratitude to the following open-source libraries and frameworks for their valuable contributions to this project:
+We would like to express our sincere gratitude to the authors of the neural style transfer paper for their groundbreaking research and contributions to the field. The [paper](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) titled "Image Style Transfer Using Convolutional Neural Networks" by Gatys et al. has served as a fundamental reference for our project. We greatly appreciate their innovative work, which has paved the way for advancements in neural style transfer techniques.
+
+We would also like to extend our appreciation to the following open-source libraries and frameworks for their valuable contributions to this project:
 
 - [PyTorch](https://pytorch.org/) - A deep learning framework used for implementing the neural style transfer models.
 - [OpenCV](https://opencv.org/) - A computer vision library used for video processing and manipulation.
